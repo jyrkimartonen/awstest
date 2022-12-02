@@ -42,9 +42,9 @@ public class HelloController {
         ret+="From environment variables of the system (through application properties)<br/>";
         ret+="Database: "+database+"<br/><br />";
         ret+="From environment variables of the system (through the injected Environment-object)<br />";
-        ret+="Database: "+environment.getProperty("MY_DATABASE")+"<br/><br />";
+        ret+="Database: "+environment.getProperty("my_database")+"<br/><br />";
         ret+="From virtual machine command line parameters (-Dsome=xxxx) <br />";
-        ret+="some: "+some+"<br />Jotain muutaasdf<br />";
+        ret+="some: "+some+"<br /><br />";
         
         return ret;
     }
