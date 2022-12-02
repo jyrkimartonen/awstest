@@ -7,6 +7,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
 
 @SpringBootApplication
 @PropertySource({ "classpath:application-${envTarget:dev}.properties" })
@@ -19,7 +20,11 @@ public class AwsTestApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(AwsTestApplication.class, args);
+        Map<String,String> env=System.getenv();
+        for(String k: env.keySet()){
+            System.out.println(k);
+        }
+        SpringApplication.run(AwsTestApplication.class, args);
 	}
 
 }
