@@ -43,7 +43,7 @@ public class HelloController {
         ret+="Database: "+database+"<br/><br />";
         ret+="From environment variables of the system (through the injected Environment-object)<br />";
         ret+="Database: "+environment.getProperty("my_database")+"<br/><br />";
-        ret+="From virtual machine command line parameters (-Dsome=xxxx)<br />";
+        ret+="From virtual machine command line parameters (-Dsome=xxxx) <br />";
         ret+="some: "+some+"<br /><br />";
         return ret;
     }
