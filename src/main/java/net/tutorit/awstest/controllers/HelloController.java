@@ -13,11 +13,34 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jyrki
  */
 @RestController
-@RequestMapping("authors")
+@RequestMapping("remote")
 public class HelloController {
-    
+    @Value("${remote}")
+    String remote;
+    @Value("${env.database}")
+    String database;
+    @Value("${some:koe}")
+    String some;
+
+    @Autowired
+    Environment environment;
+
     @GetMapping
-    public String sayHello(){
-        return "Hello";
+    public String getIt(RestTemplate rest){
+        String ret=rest.getForObject("http://"+remote+"/paintings",String.class);
+        return ret;
+    }
+
+    @GetMapping(path = "/env",produces = "text/html")
+    public String environment() {
+        String ret="Directly from application properties<br>";
+        ret += "Remote: " + remote + "<br/><br />";
+        ret+="From environment variables of the system (through application properties)<br/>";
+        ret+="Database: "+database+"<br/><br />";
+        ret+="From environment variables of the system (through the injected Environment-object)<br />";
+        ret+="Database: "+environment.getProperty("my_database")+"<br/><br />";
+        ret+="From virtual machine command line parameters (-Dsome=xxxx)<br /><br />";
+        ret+="some: "+some+"<br /><br />";
+        return ret;
     }
 }
